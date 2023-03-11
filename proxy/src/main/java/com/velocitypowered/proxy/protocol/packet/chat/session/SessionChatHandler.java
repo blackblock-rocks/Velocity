@@ -17,9 +17,6 @@
 
 package com.velocitypowered.proxy.protocol.packet.chat.session;
 
-import static com.velocitypowered.proxy.protocol.packet.chat.keyed.KeyedChatHandler.invalidCancel;
-import static com.velocitypowered.proxy.protocol.packet.chat.keyed.KeyedChatHandler.invalidChange;
-
 import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.event.player.PlayerChatEvent;
 import com.velocitypowered.proxy.VelocityServer;
@@ -60,7 +57,7 @@ public class SessionChatHandler implements ChatHandler<SessionPlayerChatPacket> 
               PlayerChatEvent.ChatResult chatResult = pme.getResult();
               if (!chatResult.isAllowed()) {
                 if (packet.isSigned()) {
-                  invalidCancel(logger, player);
+                  //invalidCancel(logger, player);
                 }
                 return null;
               }
@@ -68,7 +65,7 @@ public class SessionChatHandler implements ChatHandler<SessionPlayerChatPacket> 
               if (chatResult.getMessage().map(str -> !str.equals(packet.getMessage()))
                   .orElse(false)) {
                 if (packet.isSigned()) {
-                  invalidChange(logger, player);
+                  //invalidChange(logger, player);
                   return null;
                 }
                 return this.player.getChatBuilderFactory().builder()
